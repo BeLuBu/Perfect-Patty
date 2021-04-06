@@ -27,16 +27,18 @@ void setup() {
 void loop() {
  unsigned long currentCounter = millis()/1000UL; //counter in second
  foodSize = analogRead(nopPin);                  //read nop pin
- onOff = digitalRead(startButton);              //read button pin
+ onOff = digitalRead(startButton);               //read button pin
   
  if (onOff == HIGH){                             //push button to reset
   preCounter = currentCounter;                   //reset the clock
   digitalWrite(redPin, LOW);                     //reset lights
   digitalWrite(yellowPin,LOW);
   digitalWrite(greenPin, LOW);
-  howLong = foodSize/2;                 //formula for time to cook
+  howLong = foodSize/2;                          //formula for time to cook
  }
- if ((currentCounter - preCounter <= howLong*.40) && (preCounter != 0)) { //counting how many time leave and react
+
+ //counting how many time left and react
+ if ((currentCounter - preCounter <= howLong*.40) && (preCounter != 0)) { 
   digitalWrite(redPin, HIGH);
   digitalWrite(yellowPin,LOW);
   digitalWrite(greenPin, LOW);
